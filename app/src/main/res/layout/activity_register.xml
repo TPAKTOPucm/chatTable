@@ -11,7 +11,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Стол переговоров"
+        android:text="Регистрация"
         android:textColor="@color/white"
         android:textSize="40sp"/>
 
@@ -21,6 +21,21 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:hint="Username">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/white"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="15dp"
+        android:id="@+id/emailField"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:hint="E-mail">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -36,7 +51,24 @@
         android:layout_width="300dp"
         android:layout_height="wrap_content"
         app:endIconMode="password_toggle"
-        android:hint="Password">
+        android:hint="Password"
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/white"
+            />
+
+    </com.google.android.material.textfield.TextInputLayout>
+   <com.google.android.material.textfield.TextInputLayout
+        android:layout_margin="15dp"
+        android:id="@+id/password2Field"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:endIconMode="password_toggle"
+        android:hint="Retype Password">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="match_parent"
@@ -48,11 +80,12 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
-        android:id="@+id/loginButton"
-        android:layout_width="300dp"
-        android:layout_height="60dp"
+        style="@style/Widget.Material3.Button"
+        android:id="@+id/registerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:text="Войти"
+        android:text="Зарегистрироваться"
         />
 
 

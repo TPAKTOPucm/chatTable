@@ -9,9 +9,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        val b : Button = findViewById(R.id.enter_button)
-        b.setOnClickListener{
+        val enterButton : Button = findViewById(R.id.enter_button)
+        enterButton.setOnClickListener{
             val intent = Intent(this, SigninActivity::class.java)
+            startActivity(intent)
+        }
+        val registerButton : Button = findViewById(R.id.register_button)
+        registerButton.setOnClickListener{
+            val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
     }
