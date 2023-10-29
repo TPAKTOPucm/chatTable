@@ -5,13 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity: Start method"
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        Log.i(TAG, "onCreate")
+    companion object{
+        lateinit var navController : NavController
+    }
+
+    private fun secondLabMethod(){
         val enterButton : Button = findViewById(R.id.enter_button)
         enterButton.setOnClickListener{
             val intent = Intent(this, SigninActivity::class.java)
@@ -22,6 +25,17 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
         }
+    }
+
+    private fun thirdLabMethod(){
+        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_main)
+        Log.i(TAG, "onCreate")
+        thirdLabMethod()
     }
 
     override fun onStart() {
