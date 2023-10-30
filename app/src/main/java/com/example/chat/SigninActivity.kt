@@ -31,8 +31,8 @@ class SigninActivity : AppCompatActivity() {
         }
     }
 
-    fun login(login:String, password:String) : Boolean{
-        if(login.startsWith("banword") && login == password)
+    private fun login(login:String, password:String) : Boolean{
+        if(login.startsWith("l") && login == password)
             return true
         return false
     }

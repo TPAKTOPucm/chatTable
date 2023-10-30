@@ -1,9 +1,11 @@
 package com.example.chat
 
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import android.widget.Toast
 
 class HomeActivity : AppCompatActivity() {
     private val TAG = "HomeActivity: Start method"
@@ -13,7 +15,9 @@ class HomeActivity : AppCompatActivity() {
         Log.i(TAG, "onCreate")
         val text : TextView = findViewById(R.id.textGreeting)
         text.setText("Привет, ${intent.getStringExtra("name")}!")
-
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            Toast.makeText(applicationContext,intent.getParcelableExtra("user", User::class.java)?.email,Toast.LENGTH_SHORT)
+        }
     }
     override fun onStart() {
         super.onStart()

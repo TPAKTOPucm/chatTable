@@ -18,21 +18,16 @@ class mainFragment : Fragment(R.layout.fragment_main) {
         Log.d(TAG, "onCreate")
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        val view = super.onCreateView(inflater, container, savedInstanceState)
-        val enterButton : Button = view!!.findViewById(R.id.enter_button)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val enterButton : Button = view.findViewById(R.id.enter_button)
         enterButton.setOnClickListener{
-            MainActivity.navController.navigate(R.id.action_mainFragment_to_singinFragment)
+            MainActivity.MAIN!!.navigateToSingin()
         }
         val registerButton : Button = view.findViewById(R.id.register_button)
         registerButton.setOnClickListener{
-            MainActivity.navController.navigate(R.id.action_mainFragment_to_registerFragment)
+            MainActivity.MAIN!!.navigateToRegister()
         }
-        return view
     }
 
     override fun onStop() {

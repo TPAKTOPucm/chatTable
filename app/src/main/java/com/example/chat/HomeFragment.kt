@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -16,6 +17,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         Log.d(TAG, "onCreate")
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        val text : TextView = view.findViewById(R.id.textGreeting)
+        text.setText("Привет, ${arguments?.getString("name")}!")
+    }
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop")

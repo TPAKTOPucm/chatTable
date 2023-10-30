@@ -5,16 +5,16 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
+import androidx.fragment.app.commit
+import androidx.fragment.app.replace
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity: Start method"
     companion object{
-        lateinit var navController : NavController
+        var MAIN : MainActivity? = null
     }
 
-    private fun secondLabMethod(){
+    private fun Lab2Method(){
         val enterButton : Button = findViewById(R.id.enter_button)
         enterButton.setOnClickListener{
             val intent = Intent(this, SigninActivity::class.java)
@@ -27,15 +27,39 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun thirdLabMethod(){
-        navController = Navigation.findNavController(this,R.id.nav_host_fragment)
+    private fun Lab3Method(){
+        if (MAIN == null)
+            MAIN = this
+
+    }
+
+    public fun navigateToRegister(){
+        supportFragmentManager.commit {
+            replace<RegisterFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
+    }
+    public fun navigateToSingin(){
+        supportFragmentManager.commit {
+            replace<SinginFragment>(R.id.fragmentContainerView)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
+    }
+    public fun navigateToHome(args: Bundle?){
+        supportFragmentManager.commit {
+            replace<HomeFragment>(R.id.fragmentContainerView, args = args)
+            setReorderingAllowed(true)
+            addToBackStack(null)
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.i(TAG, "onCreate")
-        thirdLabMethod()
+        Lab3Method()
     }
 
     override fun onStart() {
