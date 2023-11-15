@@ -10,26 +10,42 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.os.bundleOf
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import com.example.chat.databinding.ActivityMainBinding
+import com.example.chat.databinding.FragmentHomeBinding
+import com.example.chat.databinding.FragmentSinginBinding
 import com.google.android.material.textfield.TextInputLayout
 
 class SinginFragment : Fragment(R.layout.fragment_singin) {
     private val TAG = "MainFragment: Start method"
-
+    private lateinit var binding: FragmentSinginBinding
+    lateinit var navController: NavController
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentSinginBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val b : Button = view.findViewById(R.id.loginButton)
+        navController = findNavController()
+        val b : Button = binding.loginButton
         b.setOnClickListener{
-            val login = view.findViewById<TextInputLayout>(R.id.loginField).editText?.text.toString()
-            val password = view.findViewById<TextInputLayout>(R.id.passwordField).editText?.text.toString()
+            val login = binding.loginField.editText?.text.toString()
+            val password = binding.passwordField.editText?.text.toString()
             if (login(login, password)) {
                 val email = "test@mail.ru"
                 val bundle = bundleOf("name" to login,"email"  to email, "password" to password, "user" to User(login,email,password))
-                MainActivity.MAIN!!.navigateToHome(bundle)
+                navController.navigate(R.id.action_singinFragment_to_homeFragment, bundle)
             } else
                 Toast.makeText(context, "Неверный логин или пароль", Toast.LENGTH_SHORT).show()
         }

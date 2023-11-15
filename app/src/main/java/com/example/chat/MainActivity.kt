@@ -7,59 +7,19 @@ import android.util.Log
 import android.widget.Button
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
+import com.example.chat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity: Start method"
-    companion object{
-        var MAIN : MainActivity? = null
-    }
-
-    private fun Lab2Method(){
-        val enterButton : Button = findViewById(R.id.enter_button)
-        enterButton.setOnClickListener{
-            val intent = Intent(this, SigninActivity::class.java)
-            startActivity(intent)
-        }
-        val registerButton : Button = findViewById(R.id.register_button)
-        registerButton.setOnClickListener{
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
-        }
-    }
-
-    private fun Lab3Method(){
-        if (MAIN == null)
-            MAIN = this
-
-    }
-
-    public fun navigateToRegister(){
-        supportFragmentManager.commit {
-            replace<RegisterFragment>(R.id.fragmentContainerView)
-            setReorderingAllowed(true)
-            addToBackStack(null)
-        }
-    }
-    public fun navigateToSingin(){
-        supportFragmentManager.commit {
-            replace<SinginFragment>(R.id.fragmentContainerView)
-            setReorderingAllowed(true)
-            addToBackStack(null)
-        }
-    }
-    public fun navigateToHome(args: Bundle?){
-        supportFragmentManager.commit {
-            replace<HomeFragment>(R.id.fragmentContainerView, args = args)
-            setReorderingAllowed(true)
-            addToBackStack(null)
-        }
-    }
+    private lateinit var binding : ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         Log.i(TAG, "onCreate")
-        Lab3Method()
     }
 
     override fun onStart() {

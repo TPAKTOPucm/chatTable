@@ -7,26 +7,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
+import com.example.chat.databinding.ActivityMainBinding
+import com.example.chat.databinding.FragmentMainBinding
 
 
 class mainFragment : Fragment(R.layout.fragment_main) {
 
     private val TAG = "MainFragment: Start method"
+    private lateinit var binding: FragmentMainBinding
+    lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
     }
 
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentMainBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val enterButton : Button = view.findViewById(R.id.enter_button)
+        navController = findNavController()
+        val enterButton = binding.enterButton
         enterButton.setOnClickListener{
-            MainActivity.MAIN!!.navigateToSingin()
+            navController.navigate(R.id.action_mainFragment_to_singinFragment)
         }
-        val registerButton : Button = view.findViewById(R.id.register_button)
+        val registerButton = binding.registerButton
         registerButton.setOnClickListener{
-            MainActivity.MAIN!!.navigateToRegister()
+            navController.navigate(R.id.action_mainFragment_to_registerFragment)
         }
     }
 
