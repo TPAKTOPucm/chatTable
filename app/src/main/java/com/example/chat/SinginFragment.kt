@@ -1,6 +1,5 @@
 package com.example.chat
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -12,10 +11,8 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.chat.databinding.ActivityMainBinding
-import com.example.chat.databinding.FragmentHomeBinding
 import com.example.chat.databinding.FragmentSinginBinding
-import com.google.android.material.textfield.TextInputLayout
+import com.example.chat.models.User
 
 class SinginFragment : Fragment(R.layout.fragment_singin) {
     private val TAG = "MainFragment: Start method"

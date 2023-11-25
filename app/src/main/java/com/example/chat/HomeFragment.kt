@@ -6,9 +6,16 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
-import com.example.chat.databinding.ActivityMainBinding
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chat.databinding.FragmentHomeBinding
+import com.example.chat.models.Character
+import com.example.chat.network.KtorNetwork
+import com.example.chat.network.NetworkApi
+import kotlinx.coroutines.launch
+import okhttp3.internal.wait
 
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
@@ -20,6 +27,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
+        binding.characterList.layoutManager = LinearLayoutManager(context)
+        var characters: Iterable<Character> = emptyList()
+        lifecycleScope.launch {
+            characters = KtorNetwork().getCharacters()
+        }
+        binding.characterList.adapter = CharacterAdapter(characters)
         return binding.root
     }
 

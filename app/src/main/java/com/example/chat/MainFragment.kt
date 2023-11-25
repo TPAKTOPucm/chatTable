@@ -6,14 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
-import com.example.chat.databinding.ActivityMainBinding
 import com.example.chat.databinding.FragmentMainBinding
 
 
-class mainFragment : Fragment(R.layout.fragment_main) {
+class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val TAG = "MainFragment: Start method"
     private lateinit var binding: FragmentMainBinding

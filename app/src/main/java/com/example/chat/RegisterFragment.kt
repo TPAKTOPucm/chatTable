@@ -1,6 +1,5 @@
 package com.example.chat
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.util.Patterns
@@ -12,9 +11,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.navigation.NavController
-import com.example.chat.databinding.ActivityMainBinding
 import com.example.chat.databinding.FragmentRegisterBinding
-import com.google.android.material.textfield.TextInputLayout
+import com.example.chat.models.User
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val TAG = "RegisterFragment: Start method"
