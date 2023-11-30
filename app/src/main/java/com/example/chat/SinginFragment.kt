@@ -16,8 +16,9 @@ import com.example.chat.models.User
 
 class SinginFragment : Fragment(R.layout.fragment_singin) {
     private val TAG = "MainFragment: Start method"
-    private lateinit var binding: FragmentSinginBinding
+    private var _binding: FragmentSinginBinding? = null
     lateinit var navController: NavController
+    private val binding get() = _binding!!
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         Log.d(TAG, "onCreate")
@@ -28,7 +29,7 @@ class SinginFragment : Fragment(R.layout.fragment_singin) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentSinginBinding.inflate(inflater, container, false)
+        _binding = FragmentSinginBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -72,5 +73,10 @@ class SinginFragment : Fragment(R.layout.fragment_singin) {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

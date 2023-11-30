@@ -20,19 +20,14 @@ import okhttp3.internal.wait
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
     private val TAG = "HomeFragment: Start method"
-    private lateinit var binding: FragmentHomeBinding
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentHomeBinding.inflate(inflater, container, false)
-        binding.characterList.layoutManager = LinearLayoutManager(context)
-        var characters: Iterable<Character> = emptyList()
-        lifecycleScope.launch {
-            characters = KtorNetwork().getCharacters()
-        }
-        binding.characterList.adapter = CharacterAdapter(characters)
+    ): View {
+        _binding = FragmentHomeBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -43,8 +38,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val text : TextView = binding.textGreeting
-        text.setText("Привет, ${arguments?.getString("name")}!")
+        binding.characterList.layoutManager = LinearLayoutManager(context)
+        var characters: List<Character>
+        lifecycleScope.launch {
+            characters = KtorNetwork().getCharacters()
+            binding.characterList.adapter = CharacterAdapter(characters)
+        }
+        binding.textGreeting.text = "Привет, ${arguments?.getString("name")}!"
     }
     override fun onStop() {
         super.onStop()
@@ -64,5 +64,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     override fun onResume() {
         super.onResume()
         Log.d(TAG, "onResume")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }

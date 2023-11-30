@@ -16,7 +16,8 @@ import com.example.chat.models.User
 
 class RegisterFragment : Fragment(R.layout.fragment_register) {
     private val TAG = "RegisterFragment: Start method"
-    private lateinit var binding: FragmentRegisterBinding
+    private val binding get() = _binding!!
+    private var _binding: FragmentRegisterBinding? = null
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -29,7 +30,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentRegisterBinding.inflate(inflater, container, false)
+        _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -68,6 +69,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
     override fun onPause() {
         super.onPause()
         Log.d(TAG, "onPause")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 
     override fun onResume() {

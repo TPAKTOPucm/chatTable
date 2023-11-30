@@ -14,7 +14,8 @@ import com.example.chat.databinding.FragmentMainBinding
 class MainFragment : Fragment(R.layout.fragment_main) {
 
     private val TAG = "MainFragment: Start method"
-    private lateinit var binding: FragmentMainBinding
+    private var _binding: FragmentMainBinding? = null
+    private val binding get() = _binding!!
     lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,8 +27,8 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentMainBinding.inflate(inflater, container, false)
+    ): View {
+        _binding = FragmentMainBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -35,11 +36,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         super.onViewCreated(view, savedInstanceState)
         navController = findNavController()
         val enterButton = binding.enterButton
-        enterButton.setOnClickListener{
+        enterButton.setOnClickListener {
             navController.navigate(R.id.action_mainFragment_to_singinFragment)
         }
         val registerButton = binding.registerButton
-        registerButton.setOnClickListener{
+        registerButton.setOnClickListener {
             navController.navigate(R.id.action_mainFragment_to_registerFragment)
         }
     }

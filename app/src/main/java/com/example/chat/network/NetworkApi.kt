@@ -39,7 +39,7 @@ class KtorNetwork : NetworkApi {
         }
     }
 
-    override suspend fun getCharacters(): Iterable<Character> {
+    override suspend fun getCharacters(): List<Character> {
         return try {
             client.get{
                 url{
@@ -52,13 +52,12 @@ class KtorNetwork : NetworkApi {
                         parameter("pagesize", 50)
                     }
                 }
-            }.let<HttpResponse, Iterable<Character>> {
-                //listOf()
+            }.let {
                 Log.d("body", it.body())
                 it.body()
             }
         } catch (ex: Exception) {
-            Log.e("bla", ex.message.toString())
+            Log.e("bad result(", ex.message.toString())
             listOf<Character>()
         }
     }

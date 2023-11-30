@@ -7,9 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.chat.databinding.CharactersLayoutBinding
 import com.example.chat.models.Character
 
-class CharacterAdapter(private var items: Iterable<Character>): RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>(){
+class CharacterAdapter(private var items: List<Character>) :
+    RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
-    class CharacterViewHolder(private val binding: CharactersLayoutBinding):
+    class CharacterViewHolder(private val binding: CharactersLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(character: Character) {
             with(binding) {
@@ -23,8 +24,10 @@ class CharacterAdapter(private var items: Iterable<Character>): RecyclerView.Ada
         }
 
     }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CharacterViewHolder {
-        val binding = CharactersLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            CharactersLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CharacterViewHolder(binding)
     }
 
