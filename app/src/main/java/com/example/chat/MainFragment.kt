@@ -45,6 +45,11 @@ class MainFragment : Fragment(R.layout.fragment_main) {
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
+    }
+
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop")

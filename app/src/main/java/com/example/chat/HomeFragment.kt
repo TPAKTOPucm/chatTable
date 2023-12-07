@@ -9,11 +9,12 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.chat.databinding.FragmentHomeBinding
 import com.example.chat.models.Character
 import com.example.chat.network.KtorNetwork
-import com.example.chat.network.NetworkApi
 import kotlinx.coroutines.launch
 import okhttp3.internal.wait
 
@@ -22,6 +23,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val TAG = "HomeFragment: Start method"
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    lateinit var navController: NavController
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -38,14 +40,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navController = findNavController()
         binding.characterList.layoutManager = LinearLayoutManager(context)
         var characters: List<Character>
         lifecycleScope.launch {
             characters = KtorNetwork().getCharacters()
             binding.characterList.adapter = CharacterAdapter(characters)
         }
-        binding.textGreeting.text = "Привет, ${arguments?.getString("name")}!"
+        binding.textGreeting.text = "Привет, ${arguments?.getString("name") ?: "user"}!"
+        binding.settingsButton.setOnClickListener{
+            navController.navigate(R.id.action_homeFragment_to_settingsFragment)
+        }
     }
+
     override fun onStop() {
         super.onStop()
         Log.d(TAG, "onStop")
