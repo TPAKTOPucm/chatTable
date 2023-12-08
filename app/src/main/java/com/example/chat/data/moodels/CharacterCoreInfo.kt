@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class CharacterCoreInfo (
-    @PrimaryKey(true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String?,
     val culture: String?,
     val born: String?,

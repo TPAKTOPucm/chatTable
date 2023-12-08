@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Title(
-    @PrimaryKey(true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val characterId: Int
 )

@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Alias(
-    @PrimaryKey(true) val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     val name: String,
     val characterId: Int
 )

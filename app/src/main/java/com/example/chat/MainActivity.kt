@@ -9,17 +9,24 @@ import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.room.Room
+import com.example.chat.data.database.Database
 import com.example.chat.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     private val TAG = "MainActivity: Start method"
     private lateinit var binding : ActivityMainBinding
+    lateinit var db: Database
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.i(TAG, "onCreate")
+        db = Room.databaseBuilder(
+            applicationContext,
+            Database::class.java, "Characters"
+        ).build()
     }
 
     override fun onStart() {

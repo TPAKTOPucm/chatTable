@@ -23,7 +23,8 @@ import java.io.FileOutputStream
 import java.io.Serializable
 
 interface NetworkApi{
-    suspend fun getCharacters(): Iterable<Character>
+    suspend fun getCharacters(): List<Character>
+    suspend fun getCharacters(page: Int): List<Character>
 }
 private const val BASE_URL = "www.anapioficeandfire.com"
 const val NUMBER_AT_GROUP_LIST = 19
@@ -43,6 +44,10 @@ class KtorNetwork : NetworkApi {
     }
 
     override suspend fun getCharacters(): List<Character> {
+        return getCharacters(NUMBER_AT_GROUP_LIST)
+    }
+
+    override suspend fun getCharacters(page: Int): List<Character> {
         return try {
             client.get{
                 url{
@@ -51,7 +56,7 @@ class KtorNetwork : NetworkApi {
                     contentType(ContentType.Application.Json)
                     path("api","characters")
                     formData {
-                        parameter("page", NUMBER_AT_GROUP_LIST)
+                        parameter("page", page)
                         parameter("pagesize", 50)
                     }
                 }
