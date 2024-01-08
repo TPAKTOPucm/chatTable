@@ -1,10 +1,12 @@
 package com.example.chat
 
 import android.content.Intent
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.commit
 import androidx.fragment.app.replace
 import androidx.navigation.NavController
@@ -20,6 +22,12 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+//        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.S)
+//            ActivityCompat.requestPermissions(
+//                this,
+//                arrayOf(Manifest.permission.),
+//                0
+//            )
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         Log.i(TAG, "onCreate")
@@ -41,11 +49,19 @@ class MainActivity : AppCompatActivity() {
 
     override fun onPause() {
         super.onPause()
+        Intent(applicationContext, ForegroundInfoService::class.java).also {
+            it.action = "start"
+            startService(it)
+        }
         Log.i(TAG, "onPause")
     }
 
     override fun onResume() {
         super.onResume()
+        Intent(applicationContext, ForegroundInfoService::class.java).also {
+            it.action = "stop"
+            startService(it)
+        }
         Log.i(TAG, "onResume")
     }
 
